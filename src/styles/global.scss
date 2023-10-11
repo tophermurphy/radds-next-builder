@@ -1,0 +1,42 @@
+// PEditor
+
+.__p-editor {
+  .__p-editor-content > * ~ * {
+    margin-top: 1em;
+  }
+
+  ul,
+  ol {
+    list-style-position: inside;
+    li > * {
+      display: inline;
+    }
+  }
+  blockquote {
+    padding: 1em 3em 2em;
+    margin: 1em auto;
+    border-left: solid 1px currentColor;
+  }
+  .__p-editor-content {
+    // Todo Work on integrating this into the Design System
+    .size--caption {
+      font-size: 0.625rem !important;
+    }
+    .size--body2 {
+      font-size: 0.75rem !important;
+    }
+    .size--body1 {
+      font-size: 1rem !important;
+    }
+    .size--lead {
+      font-size: 1.25rem !important;
+    }
+    .size--display {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
+:root {
+  --my-global-variable: #bc0000;
+}
