@@ -1,4 +1,5 @@
-import { As, Box, SimpleGrid, Text } from "@chakra-ui/react";
+import type { BlockAccordion } from "@/types/payload-types";
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import {
   Accordion as CAccordion,
   AccordionItem,
@@ -6,44 +7,29 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import PEditorParse from "./parts/PEditorParse";
+//! Need to update Editor Parse
+// import PEditorParse from "./parts/PEditorParse";
 
-// TODO Set Global: Column Gutters
-export interface AccordionProps {
-  heading?: string;
-  columns?: string;
-  list: ListItemProps[];
+interface Accordion {
+  content: BlockAccordion
 }
 
-export interface ListItemProps {
-  title: string;
-  body: string;
-}
-
-export type HTypes = 1 | 2 | 3 | 4 | 5 | 6;
-
-const themeGutters = 4;
-
-// ? Working well, but maybe FlexRow component would be better?
-// TODO: Visual styling cleanup
-
-export const Accordion = ({ content, h_level = 2 }: { content: AccordionProps, h_level?: HTypes }) => {
-  const { columns = 'c_1', heading, list } = content;
-  const headerType = `h${h_level}`;
-  const subHeadtype = `h${h_level + 1 > 6 ? 6: h_level + 1}`;
-  const cols= parseFloat(columns.replace("c_", ""));
+export const Accordion: React.FC<Accordion> = ({ content }) => {
+  const { title, columns = "1", list } = content;
+  //? Global Theme Definition ?//
+  const themeGutters = 4;
   return (
-    <div className="block __list-accordion">
-      {heading && (
-        <Text as={headerType as As} textStyle={headerType}>
-          {heading}
-        </Text>
+    <Box className="block __list-accordion">
+      {title && (
+        <Heading as="h2" textStyle="h2">
+          {title}
+        </Heading>
       )}
       <CAccordion allowToggle>
-        <SimpleGrid columns={[1, 1, cols]} spacingX={themeGutters} >
-          {list.map((item, i) => (
-            <AccordionItem key={i} >
-              <Text as={subHeadtype as As} >
+        <SimpleGrid columns={[1, 1, parseInt(columns)]} spacingX={themeGutters}>
+          {list && list.map((item, i) => (
+            <AccordionItem key={i}>
+              <Text as="h3" textStyle="h3">
                 <AccordionButton>
                   <Box as="span" flex="1" textAlign="left">
                     {item.title}
@@ -52,12 +38,14 @@ export const Accordion = ({ content, h_level = 2 }: { content: AccordionProps, h
                 </AccordionButton>
               </Text>
               <AccordionPanel pb={4}>
-                <PEditorParse body={item.body} />
+                { JSON.stringify(item.textEditor) }
               </AccordionPanel>
             </AccordionItem>
           ))}
         </SimpleGrid>
       </CAccordion>
-    </div>
+    </Box>
   );
-};
+}
+
+export default Accordion;

@@ -4,18 +4,23 @@ import BlockRouter from "@/components/BlockRouter";
 import PageTitle from "./parts/PageTitle";
 import Header from "./parts/Header";
 
+import SectionRouter from "../SectionRouter";
 
-const Layout = ({page}: {page: Global.Page}) => {
+import type { Page } from "@/types/payload-types";
+
+
+const Layout = ({page}: {page: Page}) => {
+    console.log('page', page);
     return (
         <>
-        <Header />
+        {/* <Header /> */}
         <main id={page.slug} className="layout __default">
-            { !page.remove_heading &&
+            {/* { !page.remove_heading &&
                 <PageTitle title={page.title} />
-            }
-            <BlockRouter content={page.content} />
+            } */}
+            <SectionRouter sections={page.sections} />
         </main>
-        <Footer />
+        {/* <Footer /> */}
         </>
     )
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import type { Page } from "@/types/payload-types";
+
 // Route to Layout
 import Default from "./layouts/Default";
 
@@ -10,7 +12,7 @@ export interface PageBaseProps {
 
 const Layout = Default;
 
-const PageBase = ({ page }: PageBaseProps) => {
+const PageBase = ({ page }: {page: Page}) => {
 
   return (
       <Layout page={page} />

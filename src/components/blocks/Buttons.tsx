@@ -1,25 +1,16 @@
+import type { BlockButtons, ButtonPart } from "@/types/payload-types";
 import { Stack } from "@chakra-ui/react";
-import PButton, { BtnProps } from "./parts/PButton";
+import PButton from "./parts/PButton";
 
 // TODO Default Theme Spacing for gutters
 // TODO GUTTER SPACING DEFAULT
 
-export interface BtnComponentProps {
-  content: {
-    align: string;
-    button: BtnProps[];
-  };
+interface Buttons {
+  content: BlockButtons
 }
 
-const alignMap: Util.ObjectMap = {
-  left: "start",
-  center: "center",
-  right: "end",
-};
-
-export function Buttons({ content }: BtnComponentProps) {
-  const justify = alignMap[content.align] || "center";
-
+export const Buttons: React.FC<Buttons> = ({ content }: {content: BlockButtons}) => {
+ const { justify, size, buttons } = content;
   return (
     <Stack
       alignItems="center"
@@ -28,12 +19,14 @@ export function Buttons({ content }: BtnComponentProps) {
       spacing="4"
       className="block __buttons"
     >
-      {content.button &&
-        content.button.map((b, i) => {
+      { buttons &&
+         buttons.map((b, i) => {
           return (
-            <PButton content={b} key={i} />
+            <PButton content={b.button} size={size || "md"} key={i} />
           );
         })}
     </Stack>
   );
 }
+
+export default Buttons;

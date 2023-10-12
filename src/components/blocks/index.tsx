@@ -12,7 +12,7 @@ import { FAQ } from "./FAQ";
 import { Hero } from "./Hero";
 import { Images } from "./Images";
 import { ImageText } from "./ImageText";
-import { Accordion } from "./Accordion";
+import Accordion from "./Accordion";
 import { Tabs } from "./Tabs";
 import { HeadingInfo, HeadingInfoProps } from "./HeadingInfo";
 import { Heading } from "./Heading";

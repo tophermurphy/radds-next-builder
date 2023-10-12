@@ -1,7 +1,5 @@
 import GlobalBase from "@/components/GlobalBase";
 import PageBase from "@/components/PageBase";
-import { getPageMetaData, getPagePaths } from "@/lib/globalData";
-import { getStrapiPageData } from "@/lib/strapiAPI";
 import { getPageList, getPageBySlug } from "@/lib/payloadAPI";
 
 type Params = {
@@ -12,8 +10,8 @@ type Params = {
 
 export async function generateStaticParams() {
   const pages = await getPageList();
-  return pages.map((page: any) => ({
-    slug: page.slug,
+  return pages.data.pageList.map(({slug}: { slug: string}) => ({
+    slug,
   }));
 }
 
@@ -24,11 +22,10 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Params) {
   const pageData = await getPageBySlug(params.slug);
-  console.log('pageData', pageData);
   return (
     <GlobalBase>
       <h1>Dynamo Page</h1>
-      {/* <PageBase page={pageData} /> */}
+      <PageBase page={pageData} />
     </GlobalBase>
   );
 }
