@@ -8,11 +8,7 @@ import FlexRow from "../blocks/parts/FlexRow";
 export default function Columns({ section }: { section: SectionColumns }) {
   const { columns = '2', justify = 'center'} = section.column_options || {};
 
-//   console.log('cols', columns);
-//   console.log('just', justify);
   const blockWidth = parseFloat((100 / parseInt(columns)).toFixed(6)) + "%"; 
-//   console.log('blockwidth', blockWidth);
-//   console.log("Columns section", section);
   return (
     <div style={{color: 'blue'}}>
       <h3>Columns</h3>

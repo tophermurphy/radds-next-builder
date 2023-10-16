@@ -1,16 +1,19 @@
-import { Box } from "@chakra-ui/react";
+import { Title, TitleOrder, TitleProps } from "@mantine/core";
+
 import type { BlockHeading } from "@/types/payload-types";
 
-interface Heading {
-  content: BlockHeading;
+
+interface Heading  {
+  content: BlockHeading & TitleProps;
 }
 
 export const Heading : React.FC<Heading> = ({ content }) => {
-  const { size = "h2", heading } = content;
+  const { size = "h2", heading } = content || {};
+  const titleSize = parseInt(size.replace('h', '')) as TitleOrder;
   return (
-    <Box as={size} textStyle={size} className="block __title-header">
+    <Title order={titleSize} className="block __title-header">
       {heading}
-    </Box>
+    </Title>
   );
 };
 

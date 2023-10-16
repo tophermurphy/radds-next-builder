@@ -7,7 +7,7 @@ export const getPageList = async () => {
 }
 
 export const getPageBySlug = async (slug: string) => {
-    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages?where[slug][equals]=${slug}`, { next: { revalidate: 0 } });
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages?depth=1&where[slug][equals]=${slug}`, { next: { revalidate: 0 } });
     if(!res.ok){
         throw new Error("Failed to fetch page data.");
     }

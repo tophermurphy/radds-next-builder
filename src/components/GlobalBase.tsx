@@ -1,6 +1,7 @@
 // import { getGlobalData, getPagePaths } from "@/lib/globalData";
 import ThemeProvider from "./ThemeProvider";
 import GlobalProvider from "./GlobalProvider";
+import '@mantine/core/styles.css';
 
 //* This collects all the global data and sends it to the appropriate components //
 

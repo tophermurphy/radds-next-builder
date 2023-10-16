@@ -1,12 +1,13 @@
 import type { BlockParagraph } from "@/types/payload-types"
+import { Text, TextProps } from "@mantine/core"
 
 interface Paragraph {
-    content: BlockParagraph
+    content: BlockParagraph & TextProps
 }
 
 export const Paragraph: React.FC<Paragraph> = ({content}) => {
     return(
-        <p>{content.paragraph}</p>
+        <Text>{content.paragraph}</Text>
     )
 }
 

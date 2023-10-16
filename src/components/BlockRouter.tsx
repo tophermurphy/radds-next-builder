@@ -45,9 +45,7 @@ interface BlockRouter {
 }
 
 export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width = "100%"}) => {
-  console.log('blocks', blocks);
-  console.log('width', width),
-  console.log('classnames', classNames);
+
   return (
     <>
       {blocks &&

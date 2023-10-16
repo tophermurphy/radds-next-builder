@@ -1,35 +1,67 @@
 import type { BlockCard } from "@/types/payload-types";
 
-import FlexRow, { AlignTypes, FlexRowProps } from "./parts/FlexRow";
-import { parseStrapiColumn } from "@/lib/utils";
 import {
-  Card as CCard,
-  CardHeader,
-  CardBody,
-  CardFooter,
+  Card as MCard,
+  CardProps,
   Image,
-  Stack,
   Text,
-  Box,
+  Badge,
   Button,
-} from "@chakra-ui/react";
+  Group,
+  Title,
+} from "@mantine/core";
+
 import PEditorParse from "./parts/PEditorParse";
 
 //TODO Better styling for cards
 
 interface Card {
-    content: BlockCard
-};
+  content: BlockCard & CardProps;
+}
 
-export const Card: React.FC<Card> = ({content}) => {
-  const prefix = process.env.IMAGE_URL || "localhost:2112";
+export const Card: React.FC<Card> = ({ content }) => {
+  const { title, subtitle, image, textEditor, card_color } = content || {};
+
+  let parsedText: string = "";
+
+  if (textEditor) {
+    try {
+      parsedText = JSON.parse(textEditor as any);
+    } catch {
+      parsedText = "";
+    }
+  }
+
   return (
-    <div style={{background: 'lightgray'}}>hello</div>
+    <MCard shadow="sm" padding="lg" radius="md" withBorder>
+      {image && image.hasOwnProperty("url") && (
+        <MCard.Section>
+          <Image
+            height={60}
+            fit="cover"
+            //@ts-ignore
+            src={image.url}
+            //@ts-ignore
+            alt={image.alt || ""}
+          />
+        </MCard.Section>
+      )}
+      {title && (
+        <Title order={3} size="h4">
+          {title}
+        </Title>
+      )}
+      {subtitle && (
+        <Title order={4} size="h5">
+          {subtitle}
+        </Title>
+      )}
+      {parsedText && <Text>{parsedText}</Text>}
+    </MCard>
   );
 };
 
 export default Card;
-
 
 // const variant = borderless ? "elevated" : "outline";
 // const { title, subtitle, body, link, external } = card;

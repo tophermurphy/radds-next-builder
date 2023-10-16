@@ -1,7 +1,11 @@
-import global from "@/lib/global";
-import { Box, useTheme, BoxProps } from "@chakra-ui/react";
+import { Box, BoxProps, CssVarsProp } from "@mantine/core";
 
-//TODO Responsive Gutters
+import classes from "./FlexRow.module.css";
+
+import { CSSProperties } from "@mantine/core";
+
+//TODO clean up the Typescript
+// ? allow for gutter size prop updates?
 
 export const JustifyTypes = {
   left: "flex-start",
@@ -20,7 +24,7 @@ export const AlignTypes = {
   stretch: "stretch",
 } as const;
 
-export interface FlexRowProps extends React.PropsWithChildren, BoxProps  {
+export interface FlexRowProps extends React.PropsWithChildren, BoxProps {
   gutterX?: string;
   gutterY?: string;
   justify?: string;
@@ -30,8 +34,8 @@ export interface FlexRowProps extends React.PropsWithChildren, BoxProps  {
 }
 
 export const FlexRow = ({
-  gutterX = global.gutterX,
-  gutterY = global.gutterY,
+  gutterX,
+  gutterY,
   justify = "center",
   align = "top",
   smColumns = false,
@@ -39,41 +43,21 @@ export const FlexRow = ({
   children,
   ...boxProps
 }: FlexRowProps) => {
-  const theme = useTheme();
-  const { breakpoints: bp } = theme;
-  const canwrap = wrap === true ? "wrap" : "nowrap";
-  const styles = {
-    display: "flex",
-    flexWrap: canwrap,
-    flexDirection: smColumns ? "row" : "column",
-    justifyContent: justify || 'center',
-    alignItems: AlignTypes[align],
-    marginTop: `calc(-1 * ${gutterY})`,
-    marginRight: `calc(-.5 * ${gutterX})`,
-    marginLeft: `calc(-.5 * ${gutterX})`,
-    maxHeight: '100%',
-    "& > *": {
-      paddingTop: gutterY,
-      paddingRight: `calc(${gutterX} * .5)`,
-      paddingLeft: `calc(${gutterX} * .5)`,
-      maxWidth: "100%",
-      maxHeight: "100%",
-      flexShrink: "0",
-      flexBasis: "auto",
-      flexGrow: justify === "stretch" ? "1" : "0",
-      minWidth: smColumns ? "0" : "100%",
-    },
-    [`@media(min-width: ${bp.md})`]: {
-      flexDirection: "row",
-      flexWrap: canwrap,
-      "& > *": {
-        minWidth: "0",
-      },
-    },
-  };
+  let styles: CSSProperties = {};
+  styles.justifyContent = justify;
+  console.log('styles', styles);
 
   return (
-    <Box {...boxProps} className="flex-row" sx={styles}>
+    <Box
+      {...boxProps}
+      //@ts-ignore
+      className={[
+        classes["flex-row"],
+        smColumns ? classes["__sm-cols"] : "",
+        justify === "stretch" ? classes["__stretch-cols"] : "",
+      ]}
+      style={styles}
+    >
       {children}
     </Box>
   );
