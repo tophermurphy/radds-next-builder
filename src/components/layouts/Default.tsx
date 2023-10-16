@@ -10,7 +10,6 @@ import type { Page } from "@/types/payload-types";
 
 
 const Layout = ({page}: {page: Page}) => {
-    console.log('page', page);
     return (
         <>
         {/* <Header /> */}

@@ -7,10 +7,13 @@ import type {
   BlockTextEditor,
 } from "@/types/payload-types";
 
+import { Box } from "@chakra-ui/react";
+
 import Heading from "./blocks/Heading";
 import Paragraph from "./blocks/Paragraph";
 import Accordion from "./blocks/Accordion";
 import Buttons from "./blocks/Buttons";
+import Card from "./blocks/Card";
 
 export type Blocks =
   | BlockHeading
@@ -32,9 +35,19 @@ export const BlockMap: ReactMap = {
   heading: Heading,
   accordion: Accordion,
   buttons: Buttons,
+  card: Card
 };
 
-export const BlockRouter = ({ blocks }: { blocks: Blocks[] }) => {
+interface BlockRouter {
+  blocks: Blocks[],
+  classNames?: string,
+  width?: string
+}
+
+export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width = "100%"}) => {
+  console.log('blocks', blocks);
+  console.log('width', width),
+  console.log('classnames', classNames);
   return (
     <>
       {blocks &&
@@ -42,7 +55,11 @@ export const BlockRouter = ({ blocks }: { blocks: Blocks[] }) => {
           const {blockType} = block;
           const BlockComponent = BlockMap[blockType];
           // const Component = BlockComponent.component;
-          return( <BlockComponent key={i} content={block} />);
+          return( 
+            <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} width={["100%", width]} key={i} >
+              <BlockComponent  content={block} />
+            </Box>
+          );
         })}
     </>
   );

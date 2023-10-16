@@ -28,7 +28,7 @@ export interface Config {
   };
 }
 export interface Page {
-  id: number;
+  id: string;
   title?: string;
   sections?: (SectionRow | SectionColumns)[];
   slug?: string;
@@ -38,8 +38,8 @@ export interface Page {
 export interface SectionRow {
   columns?: '1' | '2';
   layout?: '6_6' | '5_7' | '7_5' | '4_8' | '8_4' | '3_9' | '9_3';
-  column_1?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
-  column_2?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
+  col_1_blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
+  col_2_blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
   section_options?: SectionOptions;
   id?: string;
   blockName?: string;
@@ -69,17 +69,17 @@ export interface BlockAccordion {
 export interface BlockCard {
   title?: string;
   subtitle?: string;
-  image?: number | Media;
+  image?: string | Media;
   textEditor?: {
     [k: string]: unknown;
   }[];
-  card_color?: number | ThemeColor;
+  card_color?: string | ThemeColor;
   id?: string;
   blockName?: string;
   blockType: 'card';
 }
 export interface Media {
-  id: number;
+  id: string;
   alt?: string;
   title?: string;
   updatedAt: string;
@@ -118,7 +118,7 @@ export interface Media {
   };
 }
 export interface ThemeColor {
-  id: number;
+  id: string;
   name: string;
   color?: string;
   updatedAt: string;
@@ -139,10 +139,10 @@ export interface ButtonPart {
   label: string;
   icon?: string;
   link_type?: 'page' | 'url';
-  page_link?: number | Page;
+  page_link?: string | Page;
   url_link?: string;
   style?: 'primary' | 'secondary';
-  color?: number | ThemeColor;
+  color?: string | ThemeColor;
 }
 export interface BlockTextEditor {
   textEditor?: {
@@ -155,12 +155,12 @@ export interface BlockTextEditor {
 export interface SectionOptions {
   width?: 'container' | 'container-sm' | 'container-full' | 'container-bleed';
   padding?: 'py-block' | 'pt-block' | 'pb-block' | 'p0-block';
-  bg_color?: number | ThemeColor;
+  bg_color?: string | ThemeColor;
   variant?: string;
   anchor?: string;
 }
 export interface SectionColumns {
-  content?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
+  blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
   column_options?: ColumnOptions;
   section_options?: SectionOptions;
   id?: string;
@@ -172,7 +172,7 @@ export interface ColumnOptions {
   justify?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
 }
 export interface User {
-  id: number;
+  id: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -185,10 +185,10 @@ export interface User {
   password: string;
 }
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string;
   value?:
@@ -204,14 +204,14 @@ export interface PayloadPreference {
   createdAt: string;
 }
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string;
   batch?: number;
   updatedAt: string;
   createdAt: string;
 }
 export interface Siteb {
-  id: number;
+  id: string;
   thing_1?: string;
   color?: string;
   updatedAt?: string;

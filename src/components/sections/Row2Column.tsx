@@ -11,20 +11,20 @@ export default function Row2Column({
   section: SectionRow2Column;
 }) {
   return (
-    <div>
+    <div style={{color: 'green'}}>
       <h3>Row 2 Col</h3>
 
-      {section.column_1 && (
+      {section.col_1_blocks && (
         <div className="">
             <h4>column 1</h4>
-          <BlockRouter blocks={section.column_1} />
+          <BlockRouter blocks={section.col_1_blocks} />
         </div>
       )}
 
-      {section.column_2 && (
+      {section.col_2_blocks && (
         <div className="">
-            <h2>Column 2</h2>
-          <BlockRouter blocks={section.column_2} />
+            <h2 style={{color: 'green'}}>Column 2</h2>
+          <BlockRouter blocks={section.col_2_blocks} />
         </div>
       )}
     </div>

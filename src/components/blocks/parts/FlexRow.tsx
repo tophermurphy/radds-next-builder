@@ -23,7 +23,7 @@ export const AlignTypes = {
 export interface FlexRowProps extends React.PropsWithChildren, BoxProps  {
   gutterX?: string;
   gutterY?: string;
-  justify?: keyof typeof JustifyTypes;
+  justify?: string;
   align?: keyof typeof AlignTypes;
   smColumns?: boolean;
   wrap?: boolean;
@@ -46,7 +46,7 @@ export const FlexRow = ({
     display: "flex",
     flexWrap: canwrap,
     flexDirection: smColumns ? "row" : "column",
-    justifyContent: JustifyTypes[justify],
+    justifyContent: justify || 'center',
     alignItems: AlignTypes[align],
     marginTop: `calc(-1 * ${gutterY})`,
     marginRight: `calc(-.5 * ${gutterX})`,
@@ -60,7 +60,7 @@ export const FlexRow = ({
       maxHeight: "100%",
       flexShrink: "0",
       flexBasis: "auto",
-      flexGrow: JustifyTypes[justify] === "stretch" ? "1" : "0",
+      flexGrow: justify === "stretch" ? "1" : "0",
       minWidth: smColumns ? "0" : "100%",
     },
     [`@media(min-width: ${bp.md})`]: {
