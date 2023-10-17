@@ -7,16 +7,6 @@ import { CSSProperties } from "@mantine/core";
 //TODO clean up the Typescript
 // ? allow for gutter size prop updates?
 
-export const JustifyTypes = {
-  left: "flex-start",
-  right: "flex-end",
-  center: "center",
-  stretch: "stretch",
-  around: "space-around",
-  between: "space-between",
-  evenly: "space-evenly",
-} as const;
-
 export const AlignTypes = {
   top: "flex-start",
   bottom: "flex-end",
@@ -45,7 +35,6 @@ export const FlexRow = ({
 }: FlexRowProps) => {
   let styles: CSSProperties = {};
   styles.justifyContent = justify;
-  console.log('styles', styles);
 
   return (
     <Box

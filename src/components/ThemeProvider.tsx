@@ -1,27 +1,17 @@
 "use client";
-
-//* process Chakra Theme provider theme
-
 import {
   MantineProvider,
   createTheme,
   CSSVariablesResolver,
+  ColorSchemeScript,
 } from "@mantine/core";
 
 import defaultTheme from "@/lib/defaultTheme";
-
-import {
-  ChakraProvider,
-  extendTheme,
-  StyleFunctionProps,
-  defineStyleConfig,
-} from "@chakra-ui/react";
 
 import { textStyles } from "@/lib/defaultStyles";
 
 import { ButtonStyles } from "@/lib/componentStyles/button";
 import generateToneMap from "@/lib/generatePalette";
-import { create } from "domain";
 
 export default function ThemeProvider({
   children,
@@ -42,18 +32,26 @@ export default function ThemeProvider({
   const variables: CSSVariablesResolver = (theme) => ({
     variables: {
       //@ts-ignore
-      '--mantine-gutter': theme.gutter,
+      "--mantine-gutter": theme.gutter,
       //@ts-ignore
-      '--mantine-gutter-x': theme.gutterX, 
+      "--mantine-gutter-x": theme.gutterX,
       //@ts-ignore
-      '--mantine-gutter-y': theme.gutterY,
+      "--mantine-gutter-y": theme.gutterY,
     },
     light: {},
     dark: {},
   });
   return (
-    <MantineProvider theme={theme} cssVariablesResolver={variables}>
-      {children}
-    </MantineProvider>
+    <>
+      <ColorSchemeScript forceColorScheme="light" />
+      <MantineProvider
+        theme={theme}
+        cssVariablesResolver={variables}
+        defaultColorScheme="light"
+        forceColorScheme="light"
+      >
+        {children}
+      </MantineProvider>
+    </>
   );
 }

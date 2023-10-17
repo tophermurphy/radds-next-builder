@@ -1,4 +1,4 @@
-import SectionWrap from "./sections/SectionWrap";
+import SectionContainer from "./sections/SectionContainer";
 import Columns from "./sections/Columns";
 import Row1Column, { SectionRow1Column } from "./sections/Row1Column";
 import Row2Column, { SectionRow2Column } from "./sections/Row2Column";
@@ -22,33 +22,33 @@ export default function SectionRouter({ sections }: { sections: Sections }) {
     switch (true) {
       case blockType === "columns":
         return (
-          <SectionWrap
+          <SectionContainer
             sectionOptions={section.section_options || defaultSectOpts}
             id={`section-${i}`}
             key={i}
           >
             <Columns section={section as SectionColumns} />
-          </SectionWrap>
+          </SectionContainer>
         );
       case blockType === "row" && section.columns === "1":
         return (
-          <SectionWrap
+          <SectionContainer
             sectionOptions={section.section_options || defaultSectOpts}
             id={`section-${i}`}
             key={i}
           >
             <Row1Column section={section as SectionRow1Column} />
-          </SectionWrap>
+          </SectionContainer>
         );
       case blockType === "row" && section.columns === "2":
         return (
-          <SectionWrap
+          <SectionContainer
             sectionOptions={section.section_options || defaultSectOpts}
             id={`section-${i}`}
             key={i}
           >
             <Row2Column section={section as SectionRow2Column} />
-          </SectionWrap>
+          </SectionContainer>
         );
     }
   });
