@@ -1,5 +1,7 @@
 import type { SectionRow } from "@/types/payload-types";
 import BlockRouter from "../BlockRouter";
+import FlexRow from "../blocks/parts/FlexRow";
+import { Box } from "@mantine/core";
 
 export interface SectionRow2Column extends SectionRow {
   columns: "2";
@@ -11,22 +13,18 @@ export default function Row2Column({
   section: SectionRow2Column;
 }) {
   return (
-    <div style={{color: 'green'}}>
-      <h3>Row 2 Col</h3>
-
+    <FlexRow className="section_1_col">
       {section.col_1_blocks && (
-        <div className="">
-            <h4>column 1</h4>
+        <Box w="50%" className="__col-1">
           <BlockRouter blocks={section.col_1_blocks} />
-        </div>
+        </Box>
+      )}
+      {section.col_2_blocks && (
+        <Box w="50%" className="__col-2">
+          <BlockRouter blocks={section.col_2_blocks} />
+        </Box>
       )}
 
-      {section.col_2_blocks && (
-        <div className="">
-            <h2 style={{color: 'green'}}>Column 2</h2>
-          <BlockRouter blocks={section.col_2_blocks} />
-        </div>
-      )}
-    </div>
+    </FlexRow>
   );
 }

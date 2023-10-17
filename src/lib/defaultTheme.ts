@@ -4,8 +4,8 @@ type theme = {
 
 export const defaultTheme: theme = {
     gutter: '1rem',
-    gutterX: '1.5rem',
-    gutterY: '1rem'
+    gutterX: '1rem',
+    gutterY: '1.5rem'
 }
 
 export default defaultTheme;

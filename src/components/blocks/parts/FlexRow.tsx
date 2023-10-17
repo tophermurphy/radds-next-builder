@@ -31,6 +31,7 @@ export const FlexRow = ({
   smColumns = false,
   wrap = true,
   children,
+  className = "",
   ...boxProps
 }: FlexRowProps) => {
   let styles: CSSProperties = {};
@@ -41,6 +42,7 @@ export const FlexRow = ({
       {...boxProps}
       //@ts-ignore
       className={[
+        className,
         classes["flex-row"],
         smColumns ? classes["__sm-cols"] : "",
         justify === "stretch" ? classes["__stretch-cols"] : "",
