@@ -18,3 +18,13 @@ export const getPageBySlug = async (slug: string) => {
     }
     return data.docs[0];
 }
+
+export const getAPIColors = async () => {
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/theme_colors`, { cache: 'no-store' });
+    if(!res.ok){
+        throw new Error("Failed to fetch page data.");
+    }
+    const data = await res.json();
+
+    return data;
+}   

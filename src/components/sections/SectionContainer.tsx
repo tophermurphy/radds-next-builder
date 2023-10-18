@@ -37,8 +37,6 @@ export default function SectionContainer({
       ? bg_color.color
       : "none";
 
-    
-
   const Component = width === "container-bleed" ? Box : Container;
   return (
     <Box className="section_wrap" bg={wrapColor}>

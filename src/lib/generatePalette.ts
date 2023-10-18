@@ -1,4 +1,8 @@
 import chroma from "chroma-js";
+import { ThemeColor } from "@/types/payload-types";
+import { generateColors } from '@mantine/colors-generator';
+import { MantineThemeColors } from "@mantine/core";
+
 
 // TODO Refactor and clean up Types
 // TODO Change incoming API color model from 
@@ -152,14 +156,66 @@ export const generatePalette = ({
 };
 
 export const generateToneMap = (
-  colors: { name: string; color_hex: string }[]
+  colors: { name: string; color: string }[]
 ) =>
   colors.reduce(
-    (obj, { name, color_hex }) => ({
+    (obj, { name, color }) => ({
       ...obj,
-      ...generatePalette({ name, color: color_hex }),
+      ...generatePalette({ name, color: color }),
     }),
     {}
   );
 
+  //! Need to make this an object
+   export const generateColorMap = (colors: ThemeColor[]) => {
+      return colors.reduce( (obj, col) => {
+        if( col.name && col.color ){
+          const array = generateColorArray(col.color);
+          return {...obj, [col.name]: array}
+        } else {
+          return obj
+        }
+        // if( col.name && col.color ){
+        //   const array = generateColorArray(col.color);
+        //   return {
+        //     [col.name]: array
+        //   }
+        // }
+      }, {});
+      
+  }
+
+export const generateManColors = (colors: ThemeColor[]) => {
+  return colors.map(col => {
+    if(col.name && col.color){
+      const array = generateColors(col.color);
+      return {
+        [col.name]: array
+      }
+    }
+  })
+}
+
+export const generateColorArray = (color: string) =>  {
+  let colors : string [] = [];
+
+  const lumValues = [ .9, .8, .7, .6, .5, .4, .3, .2, .1, .05 ];
+
+  const mainIndex = Math.round(chroma(color).luminance() * 10);
+
+  lumValues.forEach( val => {
+    colors.push(
+      chroma(color).set("oklch.l", val).toString()
+    )
+  })
+
+  colors[mainIndex] = color;
+
+  return colors;
+
+}
+
+
+
 export default generateToneMap;
+

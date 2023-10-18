@@ -6,19 +6,33 @@ import {
   ColorSchemeScript,
 } from "@mantine/core";
 
+import type { ThemeColor } from "@/types/payload-types";
+import type { MantineThemeColors } from "@mantine/core";
+
+
 import defaultTheme from "@/lib/defaultTheme";
 
 import { textStyles } from "@/lib/defaultStyles";
 
 import { ButtonStyles } from "@/lib/componentStyles/button";
-import generateToneMap from "@/lib/generatePalette";
+import generateToneMap, {generateColorMap, generateManColors} from "@/lib/generatePalette";
 
 export default function ThemeProvider({
+  theme_colors = [],
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode,
+  theme_colors: ThemeColor[]
 }) {
-  // const mappedColors = generateToneMap(themeData.theme_colors);
+  //@ts-ignore
+  const mappedColors = generateColorMap(theme_colors);
+
+  console.log('mapped cols', mappedColors);
+
+  const manColors = generateManColors(theme_colors);
+
+  console.log('man colors', manColors);
+  
 
   // const theme = extendTheme({
   //   components: {
@@ -28,15 +42,23 @@ export default function ThemeProvider({
   //   colors: {...mappedColors}
   // });
 
-  const theme = createTheme(defaultTheme);
+
+  const themeArgs = {
+    others: defaultTheme,
+
+    colors: mappedColors,
+    primaryColor: 'primary'
+  }
+  //@ts-ignore
+  const theme = createTheme(themeArgs);
   const variables: CSSVariablesResolver = (theme) => ({
     variables: {
       //@ts-ignore
-      "--mantine-gutter": theme.gutter,
+      "--mantine-gutter": theme.others.gutter,
       //@ts-ignore
-      "--mantine-gutter-x": theme.gutterX,
+      "--mantine-gutter-x": theme.others.gutterX,
       //@ts-ignore
-      "--mantine-gutter-y": theme.gutterY,
+      "--mantine-gutter-y": theme.others.gutterY,
     },
     light: {},
     dark: {},
@@ -49,6 +71,7 @@ export default function ThemeProvider({
         cssVariablesResolver={variables}
         defaultColorScheme="light"
         forceColorScheme="light"
+        //@ts-ignore
       >
         {children}
       </MantineProvider>

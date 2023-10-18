@@ -3,10 +3,16 @@ import ThemeProvider from "./ThemeProvider";
 import GlobalProvider from "./GlobalProvider";
 import '@mantine/core/styles.css';
 
+import { getAPIColors } from "@/lib/payloadAPI";
+
 //* This collects all the global data and sends it to the appropriate components //
 
 
 export default async function GlobalBase({ children }: {children: React.ReactNode}) {
+
+  const { docs: colors } = await getAPIColors();
+
+  console.log('colsorsoof', colors);
 
   // const {theme, theme_colors, brand, header, footer} = await getGlobalData();
   
@@ -22,7 +28,7 @@ export default async function GlobalBase({ children }: {children: React.ReactNod
   // }
 
   return (
-    <ThemeProvider >
+    <ThemeProvider theme_colors={colors} >
       {/* <GlobalProvider value={brandData}> */}
         {children}
       {/* </GlobalProvider> */}
