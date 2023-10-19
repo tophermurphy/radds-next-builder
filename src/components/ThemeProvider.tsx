@@ -7,15 +7,8 @@ import {
 } from "@mantine/core";
 
 import type { ThemeColor } from "@/types/payload-types";
-import type { MantineThemeColors } from "@mantine/core";
-
-
 import defaultTheme from "@/lib/defaultTheme";
-
-import { textStyles } from "@/lib/defaultStyles";
-
-import { ButtonStyles } from "@/lib/componentStyles/button";
-import generateToneMap, {generateColorMap, generateManColors} from "@/lib/generatePalette";
+import { generateColorMap } from "@/lib/generatePalette";
 
 export default function ThemeProvider({
   theme_colors = [],
@@ -27,30 +20,14 @@ export default function ThemeProvider({
   //@ts-ignore
   const mappedColors = generateColorMap(theme_colors);
 
-  console.log('mapped cols', mappedColors);
-
-  const manColors = generateManColors(theme_colors);
-
-  console.log('man colors', manColors);
-  
-
-  // const theme = extendTheme({
-  //   components: {
-  //     Button: ButtonStyles
-  //   },
-  //   textStyles,
-  //   colors: {...mappedColors}
-  // });
-
-
   const themeArgs = {
     others: defaultTheme,
-
     colors: mappedColors,
     primaryColor: 'primary'
   }
-  //@ts-ignore
+
   const theme = createTheme(themeArgs);
+
   const variables: CSSVariablesResolver = (theme) => ({
     variables: {
       //@ts-ignore
@@ -63,6 +40,7 @@ export default function ThemeProvider({
     light: {},
     dark: {},
   });
+
   return (
     <>
       <ColorSchemeScript forceColorScheme="light" />
@@ -71,7 +49,6 @@ export default function ThemeProvider({
         cssVariablesResolver={variables}
         defaultColorScheme="light"
         forceColorScheme="light"
-        //@ts-ignore
       >
         {children}
       </MantineProvider>

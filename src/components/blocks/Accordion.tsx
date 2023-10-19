@@ -1,12 +1,5 @@
 import type { BlockAccordion } from "@/types/payload-types";
-import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
-import {
-  Accordion as CAccordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from "@chakra-ui/react";
+import { Accordion as MAccordion, Box, Title, SimpleGrid, Text } from "@mantine/core";
 //! Need to update Editor Parse
 // import PEditorParse from "./parts/PEditorParse";
 
@@ -21,29 +14,26 @@ export const Accordion: React.FC<Accordion> = ({ content }) => {
   return (
     <Box className="block __list-accordion">
       {title && (
-        <Heading as="h2" textStyle="h2">
+        <Title order={2}>
           {title}
-        </Heading>
+        </Title>
       )}
-      <CAccordion allowToggle>
-        <SimpleGrid columns={[1, 1, parseInt(columns)]} spacingX={themeGutters}>
+      <MAccordion>
+        <SimpleGrid cols={{base: 1, md: parseInt(columns)}} spacing="xl">
           {list && list.map((item, i) => (
-            <AccordionItem key={i}>
-              <Text as="h3" textStyle="h3">
-                <AccordionButton>
-                  <Box as="span" flex="1" textAlign="left">
-                    {item.title}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </Text>
-              <AccordionPanel pb={4}>
-                { JSON.stringify(item.textEditor) }
-              </AccordionPanel>
-            </AccordionItem>
+            <MAccordion.Item key={i} value={`${i}`}>
+              <MAccordion.Control>
+                <Title order={3}>
+                  { item.title }
+                </Title>
+              </MAccordion.Control>
+              <MAccordion.Panel>
+                 <Text>{JSON.stringify(item.textEditor)}</Text> 
+              </MAccordion.Panel>
+            </MAccordion.Item>
           ))}
         </SimpleGrid>
-      </CAccordion>
+      </MAccordion>
     </Box>
   );
 }
