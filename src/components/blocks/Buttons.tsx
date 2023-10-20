@@ -1,32 +1,29 @@
 import type { BlockButtons, ButtonPart } from "@/types/payload-types";
-import { Stack } from "@chakra-ui/react";
+import { Group } from "@mantine/core";
+// import { Stack } from "@chakra-ui/react";
 import PButton from "./parts/PButton";
 
 // TODO Default Theme Spacing for gutters
 // TODO GUTTER SPACING DEFAULT
 
 interface Buttons {
-  content: BlockButtons
+  content: BlockButtons;
 }
 
-export const Buttons: React.FC<Buttons> = ({ content }: {content: BlockButtons}) => {
- const { justify, size, buttons } = content;
+export const Buttons: React.FC<Buttons> = ({
+  content,
+}: {
+  content: BlockButtons;
+}) => {
+  const { justify, size, buttons } = content || {};
   return (
-    <Stack
-      alignItems="center"
-      justifyContent={justify}
-      direction={["column", "row"]}
-      spacing="4"
-      className="block __buttons"
-    >
-      { buttons &&
-         buttons.map((b, i) => {
-          return (
-            <PButton content={b.button} size={size || "md"} key={i} />
-          );
-        })}
-    </Stack>
+    <Group justify={justify} gap="lg">
+      {buttons &&
+        buttons.map((item) => (
+          <PButton button={item.button} key={item.id} size={size || 'md'} />
+        ))}
+    </Group>
   );
-}
+};
 
 export default Buttons;

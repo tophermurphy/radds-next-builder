@@ -1,14 +1,17 @@
 import type { ButtonPart } from "@/types/payload-types";
-import { Button, ButtonProps  } from "@chakra-ui/react";
+import type { ButtonProps, MantineSize } from "@mantine/core";
+import { Button } from "@mantine/core";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { SvgIconComponent } from "@material-ui/icons";
+import { PolymorphicComponentProps } from "@mantine/core/lib/core/factory/create-polymorphic-component";
+import { ReactElement } from "react";
 
 // Todo Later Icons
 // const BlankIcon = () => <div></div>;
 
 // const setIcon = (name: string) => {
-//   return dynamic(()=> 
+//   return dynamic(()=>
 //     import('@material-ui/icons').then((mod) => mod[name] as SvgIconComponent)
 //   )
 //   // const ImportFunc = import("@material-ui/icons").then((mod) => {
@@ -21,20 +24,56 @@ import { SvgIconComponent } from "@material-ui/icons";
 //   // return DynamicComp;
 // };
 
-export const PButton = ({ content, size }: { content: ButtonPart, size: string }) => {
+export const PButton = ({
+  button,
+  size,
+}: {
+  button: ButtonPart;
+  size: MantineSize;
+}) => {
+  const {
+    label,
+    icon,
+    link_type,
+    page_link,
+    url_link = "/",
+    style = "primary",
+    color = {
+      name: "primary",
+    },
+  } = button || {};
+  // TODO Button Style Outline background color white
 
-  const { label, icon, link_type, page_link, url_link = "/", style = "primary", color = "primary" } = content;
- // TODO Page Links
- // TODO colorScheme
- // TODO Button Style
+  //@ts-ignore
+  console.log('color ??', color.name);
+  console.log("style", style);
 
-  return (
-    <Button size={size} className="__p-button">
-      <Link target={link_type === "url" ? "_blank" : "_self"} href={url_link}>
-        {label} 
-      </Link>
-    </Button>
-  );
+  const buttonStyle =
+    style === "primary"
+      ? "filled"
+      : style === "secondary"
+      ? "outline"
+      : "primary";
+
+
+
+  const props : ButtonProps = {
+    variant: buttonStyle,
+    size: size,
+    //@ts-ignore
+    color: color.name
+  }
+
+  if( link_type === "url"){
+    return (
+      <Button {...props} component="a" href={url_link}>{label}</Button>
+    )
+  } else if (link_type === "page"){
+    return (
+      <Button {...props}  component={Link} href={`/${typeof page_link !== "string" ? page_link?.slug : ""}`}>{label}</Button>
+    )
+  }
+
 };
 
 export default PButton;
