@@ -2,10 +2,6 @@ import type { ButtonPart } from "@/types/payload-types";
 import type { ButtonProps, MantineSize } from "@mantine/core";
 import { Button } from "@mantine/core";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { SvgIconComponent } from "@material-ui/icons";
-import { PolymorphicComponentProps } from "@mantine/core/lib/core/factory/create-polymorphic-component";
-import { ReactElement } from "react";
 
 // Todo Later Icons
 // const BlankIcon = () => <div></div>;
@@ -44,24 +40,18 @@ export const PButton = ({
   } = button || {};
   // TODO Button Style Outline background color white
 
-  //@ts-ignore
-  console.log('color ??', color.name);
-  console.log("style", style);
-
-  const buttonStyle =
+  const variant =
     style === "primary"
       ? "filled"
       : style === "secondary"
       ? "outline"
       : "primary";
 
-
-
   const props : ButtonProps = {
-    variant: buttonStyle,
+    variant: variant,
     size: size,
     //@ts-ignore
-    color: color.name
+    color: color.name,
   }
 
   if( link_type === "url"){
@@ -70,7 +60,7 @@ export const PButton = ({
     )
   } else if (link_type === "page"){
     return (
-      <Button {...props}  component={Link} href={`/${typeof page_link !== "string" ? page_link?.slug : ""}`}>{label}</Button>
+      <Button {...props} component={Link} href={`/${typeof page_link !== "string" ? page_link?.slug : ""}`}>{label}</Button>
     )
   }
 

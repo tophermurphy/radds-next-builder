@@ -12,8 +12,6 @@ export default async function GlobalBase({ children }: {children: React.ReactNod
 
   const { docs: colors } = await getAPIColors();
 
-  console.log('colsorsoof', colors);
-
   // const {theme, theme_colors, brand, header, footer} = await getGlobalData();
   
   // const themeData = {

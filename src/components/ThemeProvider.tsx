@@ -4,38 +4,50 @@ import {
   createTheme,
   CSSVariablesResolver,
   ColorSchemeScript,
+  VariantColorsResolver,
+  defaultVariantColorsResolver,
 } from "@mantine/core";
 
 import type { ThemeColor } from "@/types/payload-types";
 import defaultTheme from "@/lib/defaultTheme";
-import { generateColorMap } from "@/lib/generatePalette";
+import { generateToneMap } from "@/lib/generatePalette";
 
 export default function ThemeProvider({
   theme_colors = [],
   children,
 }: {
-  children: React.ReactNode,
-  theme_colors: ThemeColor[]
+  children: React.ReactNode;
+  theme_colors: ThemeColor[];
 }) {
-  //@ts-ignore
-  const mappedColors = generateColorMap(theme_colors);
+  
+  const mappedColors = generateToneMap(theme_colors);
+
+  const variantColorResolver: VariantColorsResolver = (input) => {
+    const defaultResolvedColors = defaultVariantColorsResolver(input);
+
+    if (input.variant === "outline") {
+      return {
+        ...defaultResolvedColors,
+        background: input.theme.white || "#fff",
+      };
+    }
+    return defaultResolvedColors;
+  };
 
   const themeArgs = {
-    others: defaultTheme,
-    colors: mappedColors,
-    primaryColor: 'primary'
-  }
+    other: defaultTheme,
+    primaryColor: "primary",
+    variantColorResolver: variantColorResolver,
+    ...mappedColors,
+  };
 
   const theme = createTheme(themeArgs);
 
   const variables: CSSVariablesResolver = (theme) => ({
     variables: {
-      //@ts-ignore
-      "--mantine-gutter": theme.others.gutter,
-      //@ts-ignore
-      "--mantine-gutter-x": theme.others.gutterX,
-      //@ts-ignore
-      "--mantine-gutter-y": theme.others.gutterY,
+      "--mantine-gutter": theme.other.gutter,
+      "--mantine-gutter-x": theme.other.gutterX,
+      "--mantine-gutter-y": theme.other.gutterY,
     },
     light: {},
     dark: {},
@@ -46,9 +58,10 @@ export default function ThemeProvider({
       <ColorSchemeScript forceColorScheme="light" />
       <MantineProvider
         theme={theme}
-        cssVariablesResolver={variables}
         defaultColorScheme="light"
         forceColorScheme="light"
+        withCssVariables={true}
+        cssVariablesResolver={variables}
       >
         {children}
       </MantineProvider>
