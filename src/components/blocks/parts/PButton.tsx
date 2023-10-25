@@ -23,9 +23,11 @@ import Link from "next/link";
 export const PButton = ({
   button,
   size,
+  external
 }: {
   button: ButtonPart;
   size: MantineSize;
+  external: boolean
 }) => {
   const {
     label,

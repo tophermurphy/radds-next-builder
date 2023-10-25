@@ -1,5 +1,6 @@
 //TODO: Link functionality
 //TODO: Cleanup
+//! I Dont thing the link is working
 
 import { Box, BoxProps, Button } from "@mantine/core";
 import Link from "next/link";
@@ -119,16 +120,18 @@ const CompWrap = ({
           NodeChildren?.reduce((str, item) => {
             return (str += item?.text ?? "");
           }, "") || "";
-          
+
+          console.log('pagelink', fields);
+          //! Need to set external link
         const ButtonProps: ButtonPart = {
           label: internalText,
           link_type: fields?.linkType === "internal" ? "page" : "url",
           style: fields?.button_options?.style ?? "primary",
           //? this may break if undefined in CMS???
           color: fields?.button_options?.color,
-          url_link: fields?.url_link ?? "/",
+          url_link: fields?.url ?? "/",
           //! Need to make sure you can only select pages
-          page_link: fields?.doc?.value?.slug ?? "/",
+          page_link: fields?.doc?.value || undefined,
         };
         return <PButton size="sm" button={ButtonProps} />;
 
