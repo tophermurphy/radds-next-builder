@@ -1,18 +1,10 @@
 //TODO: Link functionality
 //TODO: Cleanup
 
+import { Box, BoxProps, Button } from "@mantine/core";
 import Link from "next/link";
-import { Box, BoxProps } from "@mantine/core";
-
-export type SerializedLexicalEditorState = {
-  root: {
-    type: string;
-    format: string;
-    indent: number;
-    version: number;
-    children: SerializedLexicalNode[];
-  };
-};
+import PButton from "./PButton";
+import { ButtonPart } from "@/types/payload-types";
 
 export type SerializedLexicalNode = {
   children?: SerializedLexicalNode[];
@@ -59,7 +51,7 @@ type Node = {
   };
 };
 
-const WrapObject = [  
+const WrapObject = [
   { test: IS_SUPERSCRIPT, component: "sup" },
   { test: IS_SUBSCRIPT, component: "sub" },
   { test: IS_CODE, component: "code" },
@@ -81,21 +73,29 @@ const SetComp = ({
       if (!Component && el.component) {
         const componentName = el.component;
         let props: BoxProps = {};
-        if( el.style ){
+        if (el.style) {
           props.style = {
-            textDecoration: el.style
-          }
+            textDecoration: el.style,
+          };
         }
-        Component = <Box {...props} component={componentName as any}>{text}</Box>;
+        Component = (
+          <Box {...props} component={componentName as any}>
+            {text}
+          </Box>
+        );
       } else {
         const componentName = el.component;
         let props: BoxProps = {};
-        if( el.style ){
+        if (el.style) {
           props.style = {
-            textDecoration: el.style
-          }
+            textDecoration: el.style,
+          };
         }
-        Component = <Box {...props} component={componentName as any}>{Component}</Box>;
+        Component = (
+          <Box {...props} component={componentName as any}>
+            {Component}
+          </Box>
+        );
       }
     } else {
       return <>{text}</>;
@@ -113,7 +113,46 @@ const CompWrap = ({
     const Component = "br";
     return <Component />;
   } else if (type === "link") {
-    return <Link href="/">{NodeChildren ? NodeChildren[0].text : ""}</Link>;
+    switch (true) {
+      case fields && fields.button === true:
+        const internalText =
+          NodeChildren?.reduce((str, item) => {
+            return (str += item?.text ?? "");
+          }, "") || "";
+          
+        const ButtonProps: ButtonPart = {
+          label: internalText,
+          link_type: fields?.linkType === "internal" ? "page" : "url",
+          style: fields?.button_options?.style ?? "primary",
+          //? this may break if undefined in CMS???
+          color: fields?.button_options?.color,
+          url_link: fields?.url_link ?? "/",
+          //! Need to make sure you can only select pages
+          page_link: fields?.doc?.value?.slug ?? "/",
+        };
+        return <PButton size="sm" button={ButtonProps} />;
+
+      case fields && fields.button === false && fields.linkType === "internal":
+        return (
+          <Link href={fields?.doc?.value?.slug ?? "/"}>
+            {SetComp({ format, text, type, fields })}
+          </Link>
+        );
+
+      case fields && fields.button === false && fields.linkType === "custom":
+        const Component = "a";
+        return (
+          <Component
+            href={fields?.url ?? "/"}
+            target={fields?.newTab ? "_blank" : "_self"}
+          >
+            {SetComp({ format, text, type, fields })}
+          </Component>
+        );
+
+      default:
+        return SetComp({ format, text, type, fields });
+    }
   } else if (type === "text") {
     return SetComp({ format, text, type, fields });
   } else return null;
@@ -123,8 +162,8 @@ export const PLexicalParse = ({ content }: PLexicalParse) => {
   if (!content.length) return "";
   return (
     content &&
-    content.map((item) => {
-      return CompWrap({ props: item });
+    content.map((item, i) => {
+      return <CompWrap props={item} key={i} />;
     })
   );
 };
