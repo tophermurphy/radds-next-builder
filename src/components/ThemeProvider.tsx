@@ -22,6 +22,8 @@ export default function ThemeProvider({
   
   const mappedColors = generateToneMap(theme_colors);
 
+  //TODO: Usef VariantColorResolver to set background and color for each themeColor
+
   const variantColorResolver: VariantColorsResolver = (input) => {
     const defaultResolvedColors = defaultVariantColorsResolver(input);
 

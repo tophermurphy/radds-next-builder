@@ -11,7 +11,6 @@ import {
   Title,
 } from "@mantine/core";
 
-import PEditorParse from "./parts/PEditorParse";
 
 //TODO Better styling for cards
 

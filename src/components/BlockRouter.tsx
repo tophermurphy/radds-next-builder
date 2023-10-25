@@ -14,6 +14,7 @@ import Paragraph from "./blocks/Paragraph";
 import Accordion from "./blocks/Accordion";
 import Buttons from "./blocks/Buttons";
 import Card from "./blocks/Card";
+import TextEditor from "./blocks/TextEditor";
 
 export type Blocks =
   | BlockHeading
@@ -35,7 +36,8 @@ export const BlockMap: ReactMap = {
   heading: Heading,
   accordion: Accordion,
   buttons: Buttons,
-  card: Card
+  card: Card,
+  textEditor: TextEditor
 };
 
 interface BlockRouter {

@@ -13,18 +13,20 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
+    //TODO unoptimized: true  set for error issue
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
+        port: '2112',
+        pathname: '/media/**',
       },
       {
         protocol: 'http',
         hostname: '127.0.0.1',
-        port: '1337',
-        pathname: '/uploads/**',
+        port: '2112',
+        pathname: '/media/**',
       },
     ],
   },
