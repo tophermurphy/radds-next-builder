@@ -1,12 +1,12 @@
-// import { SerializedEditorState, SerializedLexicalNode } from "lexical";
 import { BoxProps, Text, Title, TitleOrder } from "@mantine/core";
+import { Blockquote } from "@mantine/core";
 import PLexicalMedia from "./parts/PLexicalMedia";
 import PLexicalParse, {
   SerializedLexicalNode,
 } from "./parts/PLexicalParse";
 
 //TODO Typscript conditional based of tag value
-type ElementTypes = "heading" | "paragraph" | "upload";
+type ElementTypes = "heading" | "paragraph" | "upload" | "quote";
 type Headings = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 type Format = "" | "left" | "right" | "center";
 interface BaseNode {
@@ -67,7 +67,10 @@ export const TextEditor: React.FC<TextEditor> = ({ content }) => {
         case "paragraph": 
             return  <Text key={i} {...props} ><PLexicalParse content={element.children} /></Text>
         case "upload": 
-            return <PLexicalMedia key={i} content={element} />
+            return <PLexicalMedia key={i} content={element} />;
+        case "quote" : 
+          props.my = "md";
+          return <Blockquote {...props}><PLexicalParse content={element.children} /></Blockquote>
         default:
             return  <Text key={i} {...props} ><PLexicalParse content={element.children} /></Text>
     }

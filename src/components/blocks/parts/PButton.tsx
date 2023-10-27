@@ -23,11 +23,9 @@ import Link from "next/link";
 export const PButton = ({
   button,
   size,
-  external
 }: {
   button: ButtonPart;
   size: MantineSize;
-  external: boolean
 }) => {
   const {
     label,
@@ -39,6 +37,7 @@ export const PButton = ({
     color = {
       name: "primary",
     },
+    newTab,
   } = button || {};
   // TODO Button Style Outline background color white
 
@@ -49,23 +48,36 @@ export const PButton = ({
       ? "outline"
       : "primary";
 
-  const props : ButtonProps = {
+  const props: ButtonProps = {
     variant: variant,
     size: size,
     //@ts-ignore
     color: color.name,
-  }
+  };
 
-  if( link_type === "url"){
+  if (link_type === "url") {
     return (
-      <Button {...props} component="a" href={url_link}>{label}</Button>
-    )
-  } else if (link_type === "page"){
+      <Button
+        {...props}
+        component="a"
+        target={newTab === true ? "_blank" : "_self"}
+        href={url_link}
+      >
+        {label}
+      </Button>
+    );
+  } else if (link_type === "page") {
     return (
-      <Button {...props} component={Link} href={`/${typeof page_link !== "string" ? page_link?.slug : ""}`}>{label}</Button>
-    )
+      <Button
+        {...props}
+        target={newTab === true ? "_blank" : "_self"}
+        component={Link}
+        href={`/${typeof page_link !== "string" ? page_link?.slug : ""}`}
+      >
+        {label}
+      </Button>
+    );
   }
-
 };
 
 export default PButton;

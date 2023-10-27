@@ -1,6 +1,4 @@
-//TODO: Link functionality
 //TODO: Cleanup
-//! I Dont thing the link is working
 
 import { Box, BoxProps, Button } from "@mantine/core";
 import Link from "next/link";
@@ -121,7 +119,6 @@ const CompWrap = ({
             return (str += item?.text ?? "");
           }, "") || "";
 
-          console.log('pagelink', fields);
           //! Need to set external link
         const ButtonProps: ButtonPart = {
           label: internalText,
@@ -132,6 +129,7 @@ const CompWrap = ({
           url_link: fields?.url ?? "/",
           //! Need to make sure you can only select pages
           page_link: fields?.doc?.value || undefined,
+          newTab: fields?.newTab
         };
         return <PButton size="sm" button={ButtonProps} />;
 

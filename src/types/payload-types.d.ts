@@ -141,6 +141,7 @@ export interface ButtonPart {
   link_type?: 'page' | 'url';
   page_link?: string | Page;
   url_link?: string;
+  newTab?: boolean;
   style?: 'primary' | 'secondary';
   color?: string | ThemeColor;
 }
@@ -154,7 +155,7 @@ export interface BlockTextEditor {
 }
 export interface SectionOptions {
   width?: 'container' | 'container-sm' | 'container-full' | 'container-bleed';
-  padding?: 'py-block' | 'pt-block' | 'pb-block' | 'p0-block';
+  padding?: 'top_bottom' | 'top' | 'bottom' | 'none';
   bg_color?: string | ThemeColor;
   variant?: string;
   anchor?: string;
@@ -220,17 +221,5 @@ export interface Siteb {
 
 
 declare module 'payload' {
-  export interface GeneratedTypes {
-    collections: {
-      'pages': Page
-      'media': Media
-      'theme_colors': ThemeColor
-      'users': User
-      'payload-preferences': PayloadPreference
-      'payload-migrations': PayloadMigration
-    }
-    globals: {
-      'sitebs': Siteb
-    }
-  }
+  export interface GeneratedTypes extends Config {}
 }
