@@ -30,15 +30,13 @@ export interface Config {
 export interface Page {
   id: string;
   title?: string;
-  sections?: (SectionRow | SectionColumns)[];
+  sections?: (SectionSection | SectionRow | SectionColumns)[];
   slug?: string;
   updatedAt: string;
   createdAt: string;
 }
-export interface SectionRow {
-  columns?: '1' | '2';
-  layout?: '6_6' | '5_7' | '7_5' | '4_8' | '8_4' | '3_9' | '9_3';
-  col_1_blocks?: (
+export interface SectionSection {
+  blocks?: (
     | BlockHeading
     | BlockParagraph
     | BlockAccordion
@@ -47,21 +45,12 @@ export interface SectionRow {
     | BlockTextEditor
     | BlockDivider
     | BlockImage
-  )[];
-  col_2_blocks?: (
-    | BlockHeading
-    | BlockParagraph
-    | BlockAccordion
-    | BlockCard
-    | BlockButtons
-    | BlockTextEditor
-    | BlockDivider
-    | BlockImage
+    | BlockQuote
   )[];
   section_options?: SectionOptions;
   id?: string;
   blockName?: string;
-  blockType: 'row';
+  blockType: 'section';
 }
 export interface BlockHeading {
   size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -187,12 +176,50 @@ export interface BlockImage {
   blockName?: string;
   blockType: 'image';
 }
+export interface BlockQuote {
+  text: string;
+  source?: string;
+  color?: string | ThemeColor;
+  id?: string;
+  blockName?: string;
+  blockType: 'quote';
+}
 export interface SectionOptions {
   width?: 'container' | 'container-sm' | 'container-full' | 'container-bleed';
   padding?: 'top_bottom' | 'top' | 'bottom' | 'none';
   bg_color?: string | ThemeColor;
   variant?: string;
   anchor?: string;
+}
+export interface SectionRow {
+  columns?: '1' | '2';
+  layout?: '6_6' | '5_7' | '7_5' | '4_8' | '8_4' | '3_9' | '9_3';
+  col_1_blocks?: (
+    | BlockHeading
+    | BlockParagraph
+    | BlockAccordion
+    | BlockCard
+    | BlockButtons
+    | BlockTextEditor
+    | BlockDivider
+    | BlockImage
+    | BlockQuote
+  )[];
+  col_2_blocks?: (
+    | BlockHeading
+    | BlockParagraph
+    | BlockAccordion
+    | BlockCard
+    | BlockButtons
+    | BlockTextEditor
+    | BlockDivider
+    | BlockImage
+    | BlockQuote
+  )[];
+  section_options?: SectionOptions;
+  id?: string;
+  blockName?: string;
+  blockType: 'row';
 }
 export interface SectionColumns {
   blocks?: (

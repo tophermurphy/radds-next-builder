@@ -6,7 +6,8 @@ import type {
   BlockParagraph,
   BlockTextEditor,
   BlockDivider,
-  BlockImage
+  BlockImage,
+  BlockQuote
 } from "@/types/payload-types";
 
 import { Box } from "@chakra-ui/react";
@@ -18,7 +19,8 @@ import Buttons from "./blocks/Buttons";
 import Card from "./blocks/Card";
 import TextEditor from "./blocks/TextEditor";
 import Divider from "./blocks/Divider";
-import  Image from "./blocks/Image";
+import Image from "./blocks/Image";
+import Quote from "./blocks/Quote";
 
 //TODO fix the typing with generic
 export type Blocks =
@@ -29,7 +31,8 @@ export type Blocks =
   | BlockButtons
   | BlockTextEditor
   | BlockDivider
-  | BlockImage
+  | BlockImage 
+  | BlockQuote
   | any;
 
 type BlockType = {
@@ -47,7 +50,8 @@ export const BlockMap: ReactMap = {
   card: Card,
   textEditor: TextEditor,
   divider: Divider,
-  image: Image
+  image: Image,
+  quote: Quote
 };
 
 interface BlockRouter {
@@ -57,14 +61,12 @@ interface BlockRouter {
 }
 
 export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width = "100%"}) => {
-
   return (
     <>
       {blocks &&
         blocks.map((block, i) => {
           const {blockType} = block;
           const BlockComponent = BlockMap[blockType];
-          // const Component = BlockComponent.component;
           return( 
             <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} h="100%" width={["100%", width]} key={i} >
               <BlockComponent  content={block} />

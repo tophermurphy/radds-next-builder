@@ -7,7 +7,7 @@ export interface Image {
 }
 
 export const Image: React.FC<Image> = ({content}) => {
-    const {image, justify = "center", align = "center", fill = false} = content;
+    const {image, justify = "center", align = "center", fill} = content;
     if ( !image || typeof image === "string") return null;
     const { id, alt = "", url, width, height } = image;
     if( !url ) return null;
