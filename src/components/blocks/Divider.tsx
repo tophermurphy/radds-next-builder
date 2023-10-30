@@ -1,22 +1,21 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Box, BoxProps } from "@mantine/core";
 
-interface DividerProps {
-  divider_height: string;
-  divider_color: Global.Color;
+import { BlockDivider } from "@/types/payload-types";
+
+interface Divider {
+  content: BlockDivider
 }
 
-export const Divider = ({ content }: { content: DividerProps }) => {
 
-  const {
-    divider_height = 0,
-    divider_color: { name: color },
-  } = content;
-
-  const bgColor = !color ? "transparent" : `${color}.main`;
+export const Divider: React.FC<Divider> = ({ content }) => {
+  const { height, color } = content;
+  const bgColor = !color || typeof color === "string" ? "#fff" : color.name;
 
   const boxProps: BoxProps = {
-    height: `${divider_height}px`,
-    backgroundColor: bgColor,
+    h: height,
+    bg: bgColor,
   };
   return <Box {...boxProps} />;
 };
+
+export default Divider;

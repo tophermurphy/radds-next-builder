@@ -38,8 +38,26 @@ export interface Page {
 export interface SectionRow {
   columns?: '1' | '2';
   layout?: '6_6' | '5_7' | '7_5' | '4_8' | '8_4' | '3_9' | '9_3';
-  col_1_blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
-  col_2_blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
+  col_1_blocks?: (
+    | BlockHeading
+    | BlockParagraph
+    | BlockAccordion
+    | BlockCard
+    | BlockButtons
+    | BlockTextEditor
+    | BlockDivider
+    | BlockImage
+  )[];
+  col_2_blocks?: (
+    | BlockHeading
+    | BlockParagraph
+    | BlockAccordion
+    | BlockCard
+    | BlockButtons
+    | BlockTextEditor
+    | BlockDivider
+    | BlockImage
+  )[];
   section_options?: SectionOptions;
   id?: string;
   blockName?: string;
@@ -153,6 +171,22 @@ export interface BlockTextEditor {
   blockName?: string;
   blockType: 'textEditor';
 }
+export interface BlockDivider {
+  height: number;
+  color?: string | ThemeColor;
+  id?: string;
+  blockName?: string;
+  blockType: 'divider';
+}
+export interface BlockImage {
+  justify: 'left' | 'center' | 'right';
+  align: 'flex-start' | 'center' | 'flex-end';
+  fill?: boolean;
+  image: string | Media;
+  id?: string;
+  blockName?: string;
+  blockType: 'image';
+}
 export interface SectionOptions {
   width?: 'container' | 'container-sm' | 'container-full' | 'container-bleed';
   padding?: 'top_bottom' | 'top' | 'bottom' | 'none';
@@ -161,7 +195,16 @@ export interface SectionOptions {
   anchor?: string;
 }
 export interface SectionColumns {
-  blocks?: (BlockHeading | BlockParagraph | BlockAccordion | BlockCard | BlockButtons | BlockTextEditor)[];
+  blocks?: (
+    | BlockHeading
+    | BlockParagraph
+    | BlockAccordion
+    | BlockCard
+    | BlockButtons
+    | BlockTextEditor
+    | BlockDivider
+    | BlockImage
+  )[];
   column_options?: ColumnOptions;
   section_options?: SectionOptions;
   id?: string;

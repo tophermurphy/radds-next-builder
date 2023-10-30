@@ -6,7 +6,7 @@ import {
   IconButton,
   Slide,
 } from "@chakra-ui/react";
-import PCarousel from "./parts/PCarousel";
+import PCarousel from "../src/components/blocks/parts/PCarousel";
 
 export interface ImageProps {
   container_height?: string;

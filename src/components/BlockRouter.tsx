@@ -5,6 +5,8 @@ import type {
   BlockHeading,
   BlockParagraph,
   BlockTextEditor,
+  BlockDivider,
+  BlockImage
 } from "@/types/payload-types";
 
 import { Box } from "@chakra-ui/react";
@@ -15,14 +17,20 @@ import Accordion from "./blocks/Accordion";
 import Buttons from "./blocks/Buttons";
 import Card from "./blocks/Card";
 import TextEditor from "./blocks/TextEditor";
+import Divider from "./blocks/Divider";
+import  Image from "./blocks/Image";
 
+//TODO fix the typing with generic
 export type Blocks =
   | BlockHeading
   | BlockParagraph
   | BlockAccordion
   | BlockCard
   | BlockButtons
-  | BlockTextEditor;
+  | BlockTextEditor
+  | BlockDivider
+  | BlockImage
+  | any;
 
 type BlockType = {
   content: Blocks;
@@ -37,7 +45,9 @@ export const BlockMap: ReactMap = {
   accordion: Accordion,
   buttons: Buttons,
   card: Card,
-  textEditor: TextEditor
+  textEditor: TextEditor,
+  divider: Divider,
+  image: Image
 };
 
 interface BlockRouter {
@@ -56,7 +66,7 @@ export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width =
           const BlockComponent = BlockMap[blockType];
           // const Component = BlockComponent.component;
           return( 
-            <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} width={["100%", width]} key={i} >
+            <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} h="100%" width={["100%", width]} key={i} >
               <BlockComponent  content={block} />
             </Box>
           );

@@ -1,5 +1,5 @@
 import { Box, BoxProps, Image as CImage, ImageProps } from "@chakra-ui/react";
-import FlexRow, { AlignTypes } from "./parts/FlexRow";
+import FlexRow, { AlignTypes } from "../src/components/blocks/parts/FlexRow";
 import PEditorParse from "./parts/PEditorParse";
 
 //TODO Image Max-Height

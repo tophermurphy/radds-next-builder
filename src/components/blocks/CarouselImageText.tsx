@@ -1,4 +1,4 @@
-import { ImageText, ImageTextProps } from "./ImageText";
+import { ImageText, ImageTextProps } from "../../../_zArchive/ImageText";
 import PCarousel from "./parts/PCarousel";
 
 export interface CarouselImageTextProps extends Omit<ImageTextProps, 'body' | 'media' > {
