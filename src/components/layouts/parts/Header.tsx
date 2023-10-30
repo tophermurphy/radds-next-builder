@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GlobalContext } from "@/components/GlobalProvider";
+import { GlobalContext } from "_zArchive/GlobalProvider";
 import Nav from "./Nav";
 import { Box, Container, Flex, Image, Spacer } from "@chakra-ui/react";
 

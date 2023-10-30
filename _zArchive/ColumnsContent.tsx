@@ -1,7 +1,7 @@
 import { Box, BoxProps } from "@chakra-ui/react";
 import { PTextEditorProps } from "./parts/PTextEditor";
 import { Content, ContentProps, widthMap } from "./Content";
-import FlexRow, { FlexRowProps } from "./parts/FlexRow";
+import FlexRow, { FlexRowProps } from "../src/components/blocks/parts/FlexRow";
 
 export interface ColumnsContentProps {
   text_editor: PTextEditorProps[];

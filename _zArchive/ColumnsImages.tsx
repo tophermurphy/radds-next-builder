@@ -1,4 +1,4 @@
-import FlexRow, { FlexRowProps, AlignTypes } from "./parts/FlexRow";
+import FlexRow, { FlexRowProps, AlignTypes } from "../src/components/blocks/parts/FlexRow";
 import { Box, Image } from "@chakra-ui/react";
 export interface ColumnsImagesProps {
   image_align?: string;

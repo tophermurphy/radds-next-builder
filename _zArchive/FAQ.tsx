@@ -1,5 +1,5 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { Accordion, ListItemProps, AccordionProps } from "./Accordion";
+import { Accordion, ListItemProps, AccordionProps } from "../src/components/blocks/Accordion";
 
 export interface FAQsProps {
   max_per_category: number;

@@ -1,13 +1,17 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Box, BoxProps } from "@mantine/core";
+
+//TODO: Different Mantine component
 
 export const BlockError = ({error_msg}: {error_msg: string}) => {
     const props: BoxProps = {
-        border: "solid 1px error",
         p: "6",
-        m: "auto"
+        m: "auto",
+        style: {
+            border: "solid 1px red"
+        }
     }
     return (
-        <Box as="span" {...props}>{error_msg}</Box>
+        <Box component="span" {...props}>{error_msg}</Box>
     )
 }
 

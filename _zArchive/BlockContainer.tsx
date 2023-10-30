@@ -1,4 +1,4 @@
-import { GetContainerProps } from "../lib/utils";
+import { GetContainerProps } from "../src/lib/utils";
 import { Box, Container } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
 

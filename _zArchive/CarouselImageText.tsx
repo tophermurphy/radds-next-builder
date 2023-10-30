@@ -1,5 +1,5 @@
-import { ImageText, ImageTextProps } from "../../../_zArchive/ImageText";
-import PCarousel from "../../../_zArchive/PCarousel";
+import { ImageText, ImageTextProps } from "./ImageText";
+import PCarousel from "./PCarousel";
 
 export interface CarouselImageTextProps extends Omit<ImageTextProps, 'body' | 'media' > {
     min_height?: number;

@@ -1,6 +1,6 @@
 import { Box, Container, HStack, Text, Link, Flex, SimpleGrid } from "@chakra-ui/react";
 import { useContext } from "react";
-import { GlobalContext } from "@/components/GlobalProvider";
+import { GlobalContext } from "_zArchive/GlobalProvider";
 import NextLink from 'next/link';
 import { parseLink } from "@/lib/utils";
 

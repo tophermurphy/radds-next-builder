@@ -18,7 +18,7 @@ import {
 import { RefObject, useRef } from "react";
 import NextLink from "next/link";
 import { useContext } from "react";
-import { GlobalContext } from "@/components/GlobalProvider";
+import { GlobalContext } from "_zArchive/GlobalProvider";
 import { parseLink } from "@/lib/utils";
 import { Menu } from "@material-ui/icons";
 

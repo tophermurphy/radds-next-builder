@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GlobalContext } from "@/components/GlobalProvider";
+import { GlobalContext } from "_zArchive/GlobalProvider";
 import {
   Flex,
   Link,

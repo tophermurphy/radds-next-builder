@@ -1,6 +1,6 @@
 // import { getGlobalData, getPagePaths } from "@/lib/globalData";
 import ThemeProvider from "./ThemeProvider";
-import GlobalProvider from "./GlobalProvider";
+import GlobalProvider from "../../_zArchive/GlobalProvider";
 import '@mantine/core/styles.css';
 
 import { getAPIColors } from "@/lib/payloadAPI";

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import { BtnProps } from "./parts/PButton";
-import { Buttons } from "./Buttons";
+import { BtnProps } from "../src/components/blocks/parts/PButton";
+import { Buttons } from "../src/components/blocks/Buttons";
 import PEditorParse from "./parts/PEditorParse";
 
 // Todo Set Global Vertical Padding for Buttons

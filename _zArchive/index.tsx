@@ -1,21 +1,21 @@
 //Map Component Name to Component here
 
-import { Quote } from "./Quote";
-import { Buttons } from "./Buttons";
+import { Quote } from "../src/components/blocks/Quote";
+import { Buttons } from "../src/components/blocks/Buttons";
 import { CarouselImageText } from "./CarouselImageText";
 import { ColumnsCards } from "./ColumnsCards";
 import { ColumnsContent } from "./ColumnsContent";
 import { ColumnsImages } from "./ColumnsImages";
 import { Content } from "./Content";
-import { Divider } from "./Divider";
+import { Divider } from "../src/components/blocks/Divider";
 import { FAQ } from "./FAQ";
 import { Hero } from "./Hero";
-import { Images } from "../../../_zArchive/Images";
-import { ImageText } from "../../../_zArchive/ImageText";
-import Accordion from "./Accordion";
-import { Tabs } from "./Tabs";
+import { Images } from "./Images";
+import { ImageText } from "./ImageText";
+import Accordion from "../src/components/blocks/Accordion";
+import { Tabs } from "../src/components/blocks/Tabs";
 import { HeadingInfo, HeadingInfoProps } from "./HeadingInfo";
-import { Heading } from "./Heading";
+import { Heading } from "../src/components/blocks/Heading";
 import { SocialLinks } from "./SocialLinks";
 
 
