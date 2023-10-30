@@ -2,7 +2,7 @@ import type { BlockImage } from "@/types/payload-types";
 import NextImage, { ImageProps } from "next/image";
 import { Flex } from "@mantine/core";
 
-export interface Image {
+interface Image {
     content: BlockImage
 }
 

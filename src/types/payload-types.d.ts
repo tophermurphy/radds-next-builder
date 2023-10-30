@@ -46,6 +46,7 @@ export interface SectionSection {
     | BlockDivider
     | BlockImage
     | BlockQuote
+    | BlockTabs
   )[];
   section_options?: SectionOptions;
   id?: string;
@@ -183,6 +184,12 @@ export interface BlockQuote {
   id?: string;
   blockName?: string;
   blockType: 'quote';
+}
+export interface BlockTabs {
+  list?: ListPart;
+  id?: string;
+  blockName?: string;
+  blockType: 'tabs';
 }
 export interface SectionOptions {
   width?: 'container' | 'container-sm' | 'container-full' | 'container-bleed';

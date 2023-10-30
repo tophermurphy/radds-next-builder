@@ -2,7 +2,7 @@
 
 import { Box, BoxProps, Button } from "@mantine/core";
 import Link from "next/link";
-import PButton from "./PButton";
+import PButton from "../PButton";
 import { ButtonPart } from "@/types/payload-types";
 
 export type SerializedLexicalNode = {

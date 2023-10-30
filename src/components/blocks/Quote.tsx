@@ -1,7 +1,7 @@
 import { Blockquote as MBlockquote } from "@mantine/core";
 import { BlockQuote } from "@/types/payload-types";
 
-export interface Quote {
+interface Quote {
   content: BlockQuote;
 }
 

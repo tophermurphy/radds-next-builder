@@ -7,11 +7,11 @@ import type {
   BlockTextEditor,
   BlockDivider,
   BlockImage,
-  BlockQuote
+  BlockQuote,
+  BlockTabs
 } from "@/types/payload-types";
 
-import { Box } from "@chakra-ui/react";
-
+import { Box } from "@mantine/core";
 import Heading from "./blocks/Heading";
 import Paragraph from "./blocks/Paragraph";
 import Accordion from "./blocks/Accordion";
@@ -21,6 +21,7 @@ import TextEditor from "./blocks/TextEditor";
 import Divider from "./blocks/Divider";
 import Image from "./blocks/Image";
 import Quote from "./blocks/Quote";
+import Tabs from "./blocks/Tabs";
 
 //TODO fix the typing with generic
 export type Blocks =
@@ -33,7 +34,7 @@ export type Blocks =
   | BlockDivider
   | BlockImage 
   | BlockQuote
-  | any;
+  | BlockTabs;
 
 type BlockType = {
   content: Blocks;
@@ -51,7 +52,8 @@ export const BlockMap: ReactMap = {
   textEditor: TextEditor,
   divider: Divider,
   image: Image,
-  quote: Quote
+  quote: Quote,
+  tabs: Tabs
 };
 
 interface BlockRouter {
@@ -68,7 +70,7 @@ export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width =
           const {blockType} = block;
           const BlockComponent = BlockMap[blockType];
           return( 
-            <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} h="100%" width={["100%", width]} key={i} >
+            <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} h="100%" w={{base: "100%", md: width}} key={i} >
               <BlockComponent  content={block} />
             </Box>
           );
@@ -78,50 +80,3 @@ export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width =
 }
 
 export default BlockRouter;
-
-/**
- * Sets the Component Dynamically
- * Values are mapped via ./block/index.tsx
- * Wraps with BlockContainer if specified in block/index
- */
-
-// import { Blocks } from "./blocks";
-// import BlockContainer from "./BlockContainer";
-
-// // TODO Need to type Block
-// type Block = any;
-
-// export default function BlockRouter({ content }: { content: Global.Block[] }) {
-//   return (
-//     <>
-//       { content && content.length &&
-//         content.map((block, i) => {
-//           const { options_block, ...content } = block;
-//           const Block = Blocks[block.__component];
-//           const BlockComponent: Block = Block.component;
-//           const blockName = content.__component;
-//           const blockId = options_block?.anchor ?? `${blockName}-${i}`;
-
-//           if (Block.useOptions ) {
-//             return (
-//               <section key={i} id={blockId} className={blockName}>
-//                 <BlockContainer options={options_block} index={i}>
-//                   <BlockComponent options={options_block} content={content} />
-//                 </BlockContainer>
-//               </section>
-//             );
-//           } else {
-//             return (
-//               <section key={i} className={blockName} id={blockId}>
-//                 <BlockComponent
-//                   key={i}
-//                   options={options_block}
-//                   content={content}
-//                 />
-//               </section>
-//             );
-//           }
-//         })}
-//     </>
-//   );
-// }
