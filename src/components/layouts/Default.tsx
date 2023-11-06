@@ -9,19 +9,20 @@ import SectionRouter from "../SectionRouter";
 import type { Page } from "@/types/payload-types";
 
 
-const Layout = ({page}: {page: Page}) => {
-    return (
-        <>
-        {/* <Header /> */}
-        <main id={page.slug} className="layout __default">
-            {/* { !page.remove_heading &&
+export default async function Layout({ page }: { page: Page }) {
+
+
+  return (
+    <>
+      {/* <Header /> */}
+      <main id={page.slug} className="layout __default">
+        {/* { !page.remove_heading &&
                 <PageTitle title={page.title} />
             } */}
-            <SectionRouter sections={page.sections} />
-        </main>
-        {/* <Footer /> */}
-        </>
-    )
-}
+        <SectionRouter sections={page.sections} />
+      </main>
+      {/* <Footer /> */}
+    </>
+  );
+};
 
-export default Layout;

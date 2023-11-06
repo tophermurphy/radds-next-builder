@@ -8,6 +8,9 @@ import {
   defaultVariantColorsResolver,
 } from "@mantine/core";
 
+import '@mantine/core/styles.css';
+
+
 import type { ThemeColor } from "@/types/payload-types";
 import defaultTheme from "@/lib/defaultTheme";
 import { generateToneMap } from "@/lib/generatePalette";

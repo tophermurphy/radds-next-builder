@@ -1,3 +1,5 @@
+
+
 export const getPageList = async () => {
     const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages/list`, { cache: 'no-store' });
     if(!res.ok){
@@ -28,3 +30,12 @@ export const getAPIColors = async () => {
 
     return data;
 }   
+
+export const getPayloadSiteOptions = async () => {
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/globals/site_options`, { cache: 'no-store' });
+    if(!res.ok){
+        throw new Error("Failed to fetch page list.");
+    }
+    return res.json()
+}
+

@@ -1,4 +1,4 @@
-import GlobalBase from "@/components/GlobalBase";
+import GlobalBase from "_zArchive/GlobalBase";
 import PageBase from "@/components/PageBase";
 import { getPageList, getPageBySlug } from "@/lib/payloadAPI";
 
@@ -23,9 +23,9 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Params) {
   const pageData = await getPageBySlug(params.slug);
   return (
-    <GlobalBase>
+    <>
       <h1>Dynamo Page</h1>
       <PageBase page={pageData} />
-    </GlobalBase>
+    </>
   );
 }

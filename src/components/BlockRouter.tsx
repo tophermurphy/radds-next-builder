@@ -71,7 +71,7 @@ export const BlockRouter: React.FC<BlockRouter> = ({ blocks, classNames, width =
           const BlockComponent = BlockMap[blockType];
           return( 
             <Box className={`block-wrap${classNames ? ' ' + classNames : ''}`} h="100%" w={{base: "100%", md: width}} key={i} >
-              <BlockComponent  content={block} />
+              <BlockComponent  content={block} />  
             </Box>
           );
         })}

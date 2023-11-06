@@ -1,4 +1,4 @@
-import GlobalBase from "@/components/GlobalBase";
+import GlobalBase from "_zArchive/GlobalBase";
 import PageBase from "@/components/PageBase";
 import { getPageBySlug } from "@/lib/payloadAPI";
 
@@ -11,8 +11,6 @@ export default async function Page() {
     const pageData = await getPageBySlug('home');
 
  return ( 
-    <GlobalBase>
         <PageBase page={pageData} />
-    </GlobalBase>
  )   
 }

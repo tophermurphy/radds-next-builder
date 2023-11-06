@@ -24,7 +24,7 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   globals: {
-    sitebs: Siteb;
+    site_options: SiteOption;
   };
 }
 export interface Page {
@@ -145,11 +145,11 @@ export interface BlockButtons {
 }
 export interface ButtonPart {
   label: string;
-  icon?: string;
   link_type?: 'page' | 'url';
+  newTab?: boolean;
   page_link?: string | Page;
   url_link?: string;
-  newTab?: boolean;
+  icon?: string;
   style?: 'primary' | 'secondary';
   color?: string | ThemeColor;
 }
@@ -288,10 +288,56 @@ export interface PayloadMigration {
   updatedAt: string;
   createdAt: string;
 }
-export interface Siteb {
+export interface SiteOption {
   id: string;
-  thing_1?: string;
-  color?: string;
+  data: {
+    org_name: string;
+    title: string;
+    description: string;
+    favicon?: string | Media;
+    meta_image?: string | Media;
+    host_name?: string;
+    ga_id?: string;
+    gtm_id?: string;
+  };
+  header?: {
+    logo?: string | Media;
+    nav?: {
+      page?: string | Page;
+      label?: string;
+      has_sublinks?: boolean;
+      sublinks?: {
+        page: string | Page;
+        label?: string;
+        id?: string;
+      }[];
+      id?: string;
+    }[];
+  };
+  footer?: {
+    logo?: string | Media;
+    copywrite_year?: string;
+    colophon?: string;
+    footer_nav?: 'none' | 'main_nav' | 'site_map' | 'custom';
+    footer_links?: {
+      label: string;
+      link_type?: 'page' | 'url';
+      newTab?: boolean;
+      page_link?: string | Page;
+      url_link?: string;
+      id?: string;
+    }[];
+  };
+  contact?: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    address_street?: string;
+    address_street_2?: string;
+    address_city?: string;
+    address_state?: string;
+    zip_code?: string;
+  };
   updatedAt?: string;
   createdAt?: string;
 }
