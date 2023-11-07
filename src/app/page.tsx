@@ -1,6 +1,6 @@
-import GlobalBase from "_zArchive/GlobalBase";
 import PageBase from "@/components/PageBase";
 import { getPageBySlug } from "@/lib/payloadAPI";
+import Default from "@/components/layouts/Default"
 
 // export async function generateMetadata() {
 //     const pageData: Global.Page = await getStrapiPageData('home');
@@ -9,6 +9,7 @@ import { getPageBySlug } from "@/lib/payloadAPI";
 
 export default async function Page() {
     const pageData = await getPageBySlug('home');
+
 
  return ( 
         <PageBase page={pageData} />
