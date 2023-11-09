@@ -14,10 +14,13 @@ import type {
 export type Sections = (SectionRow | SectionColumns | SectionSection)[] | undefined;
 
 export default function SectionRouter({ sections }: { sections: Sections }) {
+  if( !sections ) return;
+
   const defaultSectOpts: SectionOptions = {
     width: "container",
     padding: "top_bottom",
   };
+
 
   return sections?.map((section, i) => {
     const { blockType } = section;

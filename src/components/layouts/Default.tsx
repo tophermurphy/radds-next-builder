@@ -1,7 +1,3 @@
-import Nav from "./parts/Nav";
-import Footer from "./parts/Footer";
-import BlockRouter from "@/components/BlockRouter";
-import PageTitle from "./parts/PageTitle";
 import Header from "./parts/Header";
 import { AppShell, Space } from "@mantine/core";
 import SectionRouter from "../SectionRouter";

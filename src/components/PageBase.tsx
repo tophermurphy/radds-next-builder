@@ -13,7 +13,7 @@ export interface PageBaseProps {
 const Layout = Default;
 
 const PageBase = ({ page }: {page: Page}) => {
-
+  if( !page ) return;
   return (
       <Layout page={page} />
   );

@@ -1,7 +1,5 @@
-
-
 export const getPageList = async () => {
-    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages/list`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages/list`, {next: {revalidate: 30}});
     if(!res.ok){
         throw new Error("Failed to fetch page list.");
     }
@@ -9,7 +7,7 @@ export const getPageList = async () => {
 }
 
 export const getPageBySlug = async (slug: string) => {
-    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages?depth=1&where[slug][equals]=${slug}`, { next: { revalidate: 0 } });
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/pages?depth=1&where[slug][equals]=${slug}`, {next: {revalidate: 30}});
     if(!res.ok){
         throw new Error("Failed to fetch page data.");
     }
@@ -22,7 +20,7 @@ export const getPageBySlug = async (slug: string) => {
 }
 
 export const getAPIColors = async () => {
-    const res = await fetch(`${process.env.PAYLOAD_URL}/api/theme_colors`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/theme_colors`, {next: {revalidate: 30}});
     if(!res.ok){
         throw new Error("Failed to fetch page data.");
     }
@@ -32,7 +30,7 @@ export const getAPIColors = async () => {
 }   
 
 export const getPayloadSiteOptions = async () => {
-    const res = await fetch(`${process.env.PAYLOAD_URL}/api/globals/site_options`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.PAYLOAD_URL}/api/globals/site_options`, {next: {revalidate: 30}});
     if(!res.ok){
         throw new Error("Failed to fetch page list.");
     }

@@ -19,7 +19,7 @@ import Buttons from "./blocks/Buttons";
 import Card from "./blocks/Card";
 import TextEditor from "./blocks/TextEditor";
 import Divider from "./blocks/Divider";
-import Image from "./blocks/Image";
+import ImageBlock from "./blocks/ImageBlock";
 import Quote from "./blocks/Quote";
 import Tabs from "./blocks/Tabs";
 
@@ -51,7 +51,7 @@ export const BlockMap: ReactMap = {
   card: Card,
   textEditor: TextEditor,
   divider: Divider,
-  image: Image,
+  image: ImageBlock,
   quote: Quote,
   tabs: Tabs
 };

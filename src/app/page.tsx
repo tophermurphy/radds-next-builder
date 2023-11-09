@@ -1,3 +1,4 @@
+
 import PageBase from "@/components/PageBase";
 import { getPageBySlug } from "@/lib/payloadAPI";
 import Default from "@/components/layouts/Default"
