@@ -8,8 +8,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const withExportImages = require('next-export-optimize-images');
 
-const nextConfig = {
-  output: "export",
+console.log('procees.env', process.env.NODE_ENV)
+
+let nextConfig = {
   reactStrictMode: true,
 
   //? If I need another Sass File
@@ -17,9 +18,6 @@ const nextConfig = {
   //   includePaths: [path.join(__dirname, 'styles')],
   // },
   images: {
-    //TODO unoptimized: true  set for error issue
-    // unoptimized: true,
-
 
     remotePatterns: [
       {
@@ -32,6 +30,10 @@ const nextConfig = {
   },
 
 };
+
+if(process.env.NODE_ENV === 'production'){
+  nextConfig.output = 'export'
+}
 
 // module.exports = withBundleAnalyzer(nextConfig);
 module.exports = nextConfig;
