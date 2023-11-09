@@ -2,6 +2,8 @@ import type { BlockImage } from "@/types/payload-types";
 import NextImage, { ImageProps } from "next/image";
 import { Flex } from "@mantine/core";
 
+//TODO: Consider replacing NextImage
+
 interface Image {
     content: BlockImage
 }
@@ -11,8 +13,8 @@ export const Image: React.FC<Image> = ({content}) => {
     if ( !image || typeof image === "string") return null;
     const { id, alt = "", url, width, height, filename } = image;
     if( !url || !filename ) return null;
-    const prefix = process.env.NEXT_PUBLIC_MEDIAPATH;
-    
+    const prefix = process.env.NEXT_PUBLIC_MEDIAPATH || 'media/';
+
     let props: any = {
         src: prefix + filename,
         id,

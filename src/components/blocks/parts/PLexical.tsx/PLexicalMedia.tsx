@@ -10,6 +10,7 @@ type ImageSize = {
   mimeType: string;
   filesize: number;
   url: string;
+  filename: string;
 };
 
 type Sizes = "thumbnail" | "small" | "medium" | "large";
@@ -34,8 +35,9 @@ export interface PLexicalMedia {
 }
 
 export const PLexicalMedia = ({ content }: PLexicalMedia) => {
-  const { id, alt = "", width, height, url, sizes } = content.value;
+  const { id, alt = "", width, height, url, sizes, filename } = content.value;
   const { position = "left", size } = content.fields || {};
+  const prefix = process.env.NEXT_PUBLIC_MEDIAPATH || 'media/';
 
   let imageSrc: { width: number; height: number; src: string };
 
@@ -44,13 +46,13 @@ export const PLexicalMedia = ({ content }: PLexicalMedia) => {
     imageSrc = {
       width: img.width,
       height: img.height,
-      src: img.url,
+      src: prefix + img.filename,
     };
   } else {
     imageSrc = {
       width,
       height,
-      src: url,
+      src: prefix + filename,
     };
   }
   const imageProps = {

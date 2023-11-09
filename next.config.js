@@ -8,7 +8,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const withExportImages = require('next-export-optimize-images');
 
-console.log('procees.env', process.env.NODE_ENV)
 
 let nextConfig = {
   reactStrictMode: true,
@@ -18,7 +17,7 @@ let nextConfig = {
   //   includePaths: [path.join(__dirname, 'styles')],
   // },
   images: {
-
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "http",

@@ -27,6 +27,7 @@ export const Header = ({ opened, toggle }: HeaderProps) => {
   const path = usePathname();
   const layoutData = useContext(LayoutContext);
   const { nav, logo } = layoutData?.header || {};
+  const prefix = process.env.NEXT_PUBLIC_MEDIAPATH || 'media/';
 
   return (
     <>
@@ -44,7 +45,7 @@ export const Header = ({ opened, toggle }: HeaderProps) => {
                   height={50}
                   width="auto"
                   fit="contain"
-                  src={logo.url}
+                  src={prefix + logo.filename}
                   alt={logo.alt || ""}
                 />
               </Link>

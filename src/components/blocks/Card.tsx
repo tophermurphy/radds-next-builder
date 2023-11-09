@@ -30,6 +30,7 @@ export const Card: React.FC<Card> = ({ content }) => {
       parsedText = "";
     }
   }
+  const prefix = process.env.NEXT_PUBLIC_MEDIAPATH || 'media/';
 
   return (
     <MCard shadow="sm" padding="lg" radius="md" withBorder>
@@ -39,7 +40,7 @@ export const Card: React.FC<Card> = ({ content }) => {
             height={60}
             fit="cover"
             //@ts-ignore
-            src={image.url}
+            src={prefix + image.filename}
             //@ts-ignore
             alt={image.alt || ""}
           />
