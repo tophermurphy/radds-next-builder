@@ -32,7 +32,7 @@ export const getAPIColors = async () => {
 export const getPayloadSiteOptions = async () => {
     const res = await fetch(`${process.env.PAYLOAD_URL}/api/globals/site_options`, {next: {revalidate: 30}});
     if(!res.ok){
-        throw new Error("Failed to fetch page list.");
+        throw new Error("Failed to fetch site options.");
     }
     return res.json()
 }
