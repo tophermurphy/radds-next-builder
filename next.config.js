@@ -11,6 +11,7 @@ const withExportImages = require('next-export-optimize-images');
 
 let nextConfig = {
   reactStrictMode: true,
+  distDir: "docs",
 
   //? If I need another Sass File
   // sassOptions: {
