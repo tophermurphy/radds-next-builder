@@ -2,16 +2,10 @@
 
 const path = require("path");
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-
-const withExportImages = require('next-export-optimize-images');
 
 
 let nextConfig = {
   reactStrictMode: true,
-  distDir: "docs",
 
   //? If I need another Sass File
   // sassOptions: {
